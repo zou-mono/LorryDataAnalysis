@@ -17,10 +17,10 @@ namespace LorryDataAnalysis
         //[STAThread()]
         static void Main(string[] args)
         {
-            //args = ("convert -i TRK20160307 -l lpFile.csv -f -t 6").Split();
-            //args = ("convert -i test -f -t 1 -o test_sgps").Split();
-            //args = ("convert -i TRK20160307 -l lpFile.csv -t 6 -f -o stay_gps").Split();
-            args = ("extract -i stay_gps -n 6 -t 3").Split();
+            //args = ("convert -i TRK20160307 -l lpFile.csv -f -n 6").Split();
+            //args = ("convert -i test -f -n 1 -o test_sgps").Split();
+            //args = ("convert -i TRK20160307 -l lpFile.csv -f -n 8 -o stay_gps").Split();
+            //args = ("extract -i stay_gps -n 6 -n 3").Split();
             //args = ("help").Split();
 
             if (args.Length > 0) { if (args[0].ToLowerInvariant() == "help") args = args.Skip(1).ToArray(); }
@@ -71,7 +71,7 @@ namespace LorryDataAnalysis
             }
 
             printIfNotEmpty(exitCode);
-
+            Array.Clear(args,0,args.Length);
             //Console.ReadKey(true);
         }
 

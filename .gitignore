@@ -1,3 +1,5 @@
 Debug
 obj
 *.bak
+packages
+release

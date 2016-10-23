@@ -19,7 +19,8 @@ namespace LorryDataAnalysis
         private static int _pointType = -1;
         private static int _maxThread = 0;
         private StreamWriter _sw=null;
-private static object locker = new Object();
+        private bool _onlyExportPos = false;
+        private static object locker = new Object();
         public bool init(ExtractSubOptions opts)
         {
             try
@@ -40,6 +41,7 @@ private static object locker = new Object();
                 _outTempDirectory = _CurrentDirectory + @"\temp";
                 _pointType = opts.pointType;
                 _maxThread = opts.maxThread;
+                _onlyExportPos = opts.onlyExportPos;
 
                 _sw = new StreamWriter(_outFile, false, Encoding.GetEncoding("UTF-8"));
 
@@ -77,13 +79,15 @@ private static object locker = new Object();
                     while ((line = reader.ReadLine()) != null)
                     {
                         string[] a = line.Split(new char[] { ',' });
-                        string out_line = id + "," + line;
+
+                        string out_line = _onlyExportPos ? 
+                            Convert.ToString(Math.Round(Convert.ToDouble(a[0]), 5)) + "," + Convert.ToString(Math.Round(Convert.ToDouble(a[1]), 5)) : 
+                            id + "," + line;
 
                         if (TypeStay == 3)
                         {
                             if (a[5] == "1" || a[5] == "2")
                             {
-
                                 _sw.WriteLine(out_line);
                                 _sw.Flush();
                             }
